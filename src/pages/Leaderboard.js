@@ -1,35 +1,79 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Axios from 'axios';
+import { API_URL } from '../assets/utils/API';
 
 import Layout from '../components/UI/Layout';
 import main_banner from '../assets/images/banner/Leaderboard/main_banner.png';
-import TimeFilterButton from '../components/Leaderboard/TimeFilterButton';
+import LeaderboardCard from '../components/Leaderboard/LeaderboardCard';
+import TournamentResult from '../components/Leaderboard/TournamentResult';
+import TournamentFilterButton from '../components/Leaderboard/TournamentFilterButton';
+import ManageResultModal from '../components/Leaderboard/ManageResultModal';
 
 export default function Leaderboard() {
-  const [selectedTime, setSelectedTime] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedTournament, setSelectedTournament] = useState(null);
+  const [tournaments, setTournaments] = useState([]);
+
+  useEffect(() => {
+    async function fetchTournaments() {
+      try {
+        const response = await Axios.get(`${API_URL}/tournament/find?withResults=true&page=1&limit=5&sort=_id,asc`);
+
+        setTournaments(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    fetchTournaments();
+  }, []);
+
+  function renderTournamentButton() {
+    return tournaments.map((tournament) => (
+      <TournamentFilterButton
+        key={tournament._id}
+        tournament={tournament}
+        selectedTournament={selectedTournament}
+        setSelectedTournament={setSelectedTournament}
+      />
+    ));
+  }
+
+  function renderTournaments() {
+    return tournaments.map((tournament) => (
+      <LeaderboardCard key={tournament._id} tournament={tournament} setSelectedTournament={setSelectedTournament} />
+    ));
+  }
 
   return (
     <Layout>
-      <div className="min-h-screen bg-metaco_bg pt-[75px]">
-        <div className="h-96 w-full relative overflow-hidden">
+      <div className="min-h-screen bg-metaco_bg pt-[75px] flex flex-col items-center">
+        <div className="h-96 w-full relative flex flex-col">
           <img src={main_banner} className="h-full w-full object-cover" />
           <div className="inset-0 absolute bg-gradient-to-b from-transparent to-metaco_bg flex flex-col justify-center px-10">
-            <div className="flex flex-col mb-8">
+            <div className="flex flex-col mb-5">
               <span className="text-2xl text-white mb-5">Leaderboard</span>
-              <span className="text-4xl font-extrabold text-white">The Champions</span>
+              <span className="text-4xl font-extrabold text-white">
+                {selectedTournament ? selectedTournament.title : 'Tournament Results'}
+              </span>
             </div>
-            <div className="flex items-center gap-6">
-              <TimeFilterButton value={'All Time'} selectedTime={selectedTime} setSelectedTime={setSelectedTime} />
-              <TimeFilterButton value={'This Month'} selectedTime={selectedTime} setSelectedTime={setSelectedTime} />
-              <TimeFilterButton value={'This Week'} selectedTime={selectedTime} setSelectedTime={setSelectedTime} />
+            <div className="flex items-center justify-between">
+              <ManageResultModal />
             </div>
           </div>
+          <div className="w-full flex px-10 absolute bottom-0 gap-5">
+            <button
+              onClick={() => setSelectedTournament(null)}
+              className="px-6 h-14 rounded-xl bg-gray-600 text-white hover:bg-[#19303F] transition active:scale-95 hover:ring-1 hover:ring-inset hover:ring-sky-700"
+            >
+              All Tournaments
+            </button>
+            {renderTournamentButton()}
+          </div>
         </div>
-        <div className="w-full py-10 px-44 grid grid-cols-3 gap-3">
-          <div className="w-full h-96 rounded-lg bg-white"></div>
-          <div className="w-full h-96 rounded-lg bg-white"></div>
-          <div className="w-full h-96 rounded-lg bg-white"></div>
-        </div>
+        {selectedTournament ? (
+          <TournamentResult selectedTournament={selectedTournament} />
+        ) : (
+          <div className="w-full py-10 px-8 lg:px-28 grid grid-cols-3 gap-2">{renderTournaments()}</div>
+        )}
       </div>
     </Layout>
   );

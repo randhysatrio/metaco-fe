@@ -5,7 +5,7 @@ import { BsSearch } from 'react-icons/bs';
 
 export default function Header() {
   return (
-    <div className="w-full h-[75px] bg-metaco_header flex items-center justify-between lg:px-12 fixed top-0 z-[9999]">
+    <div className="w-screen h-[75px] bg-metaco_header flex items-center justify-between lg:px-12 fixed top-0 z-[100]">
       <Link to="/">
         <div className="h-[50px]">
           <MetacoLogo className="h-full object-contain" />
