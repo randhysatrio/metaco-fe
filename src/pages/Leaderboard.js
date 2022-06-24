@@ -26,6 +26,8 @@ export default function Leaderboard() {
     fetchTournaments();
   }, []);
 
+  console.log(tournaments);
+
   function renderTournamentButton() {
     return tournaments.map((tournament) => (
       <TournamentFilterButton
@@ -47,7 +49,7 @@ export default function Leaderboard() {
     <Layout>
       <div className="min-h-screen bg-metaco_bg pt-[75px] flex flex-col items-center">
         <div className="h-96 w-full relative flex flex-col">
-          <img src={main_banner} className="h-full w-full object-cover" />
+          <img src={main_banner} alt="optic" className="h-full w-full object-cover" />
           <div className="inset-0 absolute bg-gradient-to-b from-transparent to-metaco_bg flex flex-col justify-center px-10">
             <div className="flex flex-col mb-5">
               <span className="text-2xl text-white mb-5">Leaderboard</span>

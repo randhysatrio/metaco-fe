@@ -1,10 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import Home from './pages/Home';
 import InsertResult from './pages/InsertResult';
 import Leaderboard from './pages/Leaderboard';
-
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import DeleteResult from './pages/DeleteResult';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/insert-result" element={<InsertResult />} />
+        <Route path="/delete-result" element={<DeleteResult />} />
       </Routes>
       <ToastContainer />
     </BrowserRouter>

@@ -3,7 +3,7 @@ import { AiFillCheckCircle } from 'react-icons/ai';
 export default function ResultInput({ teams, index, results, setResults }) {
   function renderTeams() {
     return teams.map((team) => (
-      <option disabled={results.includes(team._id)} key={team._id} value={team.id}>
+      <option disabled={results.includes(team.id.toString())} key={team._id} value={team.id}>
         {team.name}
       </option>
     ));

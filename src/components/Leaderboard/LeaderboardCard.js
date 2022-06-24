@@ -5,7 +5,7 @@ function LeaderboardItem({ result }) {
         <span>{result.position}</span>
       </div>
       <div className="w-[55%]">
-        <span>{result.team_id.name}</span>
+        <span>{result.team.name}</span>
       </div>
       <div className="w-[25%] flex justify-center">
         <span>{result.point}</span>

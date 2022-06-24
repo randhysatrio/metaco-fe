@@ -9,16 +9,16 @@ function TournamentResultList({ result }) {
         <span className="font-bold">{result.position}</span>
       </div>
       <div className="w-4/12 flex items-center gap-4">
-        {result.team_id.logo && (
+        {result.team.logo && (
           <div className="h-8 w-8 flex items-center justify-center rounded-md overflow-hidden">
-            <img src={result.team_id.logo} className="h-full object-cover" />
+            <img src={result.team.logo} className="h-full object-cover" />
           </div>
         )}
 
-        <span className="truncate">{result.team_id.name}</span>
+        <span className="truncate">{result.team.name}</span>
       </div>
       <div className="w-4/12 flex justify-center">
-        <span className="truncate">{result.team_id.captain?.name ? result.team_id.captain.name : 'Captain Name Unavailable'}</span>
+        <span className="truncate">{result.team.captain?.name ? result.team.captain.name : 'Captain Name Unavailable'}</span>
       </div>
       <div className="w-2/12 flex justify-center">
         <span>{result.point}</span>

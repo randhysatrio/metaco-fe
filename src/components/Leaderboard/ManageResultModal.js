@@ -50,9 +50,11 @@ export default function ManageResultModal() {
                         <span className="text-lg text-white font-semibold">Insert Result</span>
                       </button>
                     </Link>
-                    <button className="w-60 h-14 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 active:scale-95 transition hover:brightness-110">
-                      <span className="text-lg text-white font-semibold">Delete Result</span>
-                    </button>
+                    <Link to="/delete-result">
+                      <button className="w-60 h-14 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 active:scale-95 transition hover:brightness-110">
+                        <span className="text-lg text-white font-semibold">Delete Result</span>
+                      </button>
+                    </Link>
                   </div>
                 </div>
                 <div className="pt-5 pb-8 flex justify-center">

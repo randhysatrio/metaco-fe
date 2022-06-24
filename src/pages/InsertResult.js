@@ -38,7 +38,7 @@ export default function InsertResult() {
         disabled={tournament.results.length}
         key={tournament._id}
         className="bg-gray-200 text-gray-800 font-semibold disabled:text-gray-400"
-        value={tournament._id}
+        value={tournament.id}
       >
         {tournament.title}
       </option>
@@ -49,7 +49,7 @@ export default function InsertResult() {
     <Layout>
       <div className="min-h-screen bg-metaco_bg pt-[75px] flex flex-col items-center">
         <div className="w-full h-96 flex flex-col relative">
-          <img src={insert_result_banner} className="h-full w-full object-cover" />
+          <img src={insert_result_banner} alt="banner" className="h-full w-full object-cover" />
           <div className="inset-0 absolute bg-gradient-to-b from-transparent to-metaco_bg flex flex-col justify-center px-10">
             <div className="flex flex-col">
               <span className="text-2xl text-white mb-5">Manage Results</span>
@@ -58,8 +58,8 @@ export default function InsertResult() {
           </div>
         </div>
         {!selectedTournamentId ? (
-          <div className="h-72 w-full flex flex-col items-center justify-center gap-8">
-            <span className="text-xl text-white font-semibold tracking-widest">Select Tournament to Insert:</span>
+          <div className="py-10 w-full flex flex-col items-center justify-center">
+            <span className="text-xl text-white font-semibold tracking-widest mb-8">Select Tournament to Insert:</span>
             <select
               onChange={(e) => setSelectedTournamentId(e.target.value)}
               className={`w-2/3 xl:w-1/2 bg-leaderboard_list border ${

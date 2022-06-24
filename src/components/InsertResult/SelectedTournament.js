@@ -10,14 +10,17 @@ import { toast } from 'react-toastify';
 export default function SelectedTournament({ tournamentId }) {
   const [tournament, setTournament] = useState({});
   const [results, setResults] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchTournament() {
       try {
+        setLoading(true);
         const response = await Axios.get(`${API_URL}/tournament/find/${tournamentId}?withTeams=true`);
 
         setTournament(response.data);
         setResults(new Array(response.data.teams.length).fill(''));
+        setLoading(false);
       } catch (err) {
         toast.error(err.message, { position: 'top-center', theme: 'colored' });
       }
@@ -31,12 +34,14 @@ export default function SelectedTournament({ tournamentId }) {
     ));
   }
 
-  console.log(results);
-
   return (
     <div id="insert-result-main" className="w-full min-h-[400px] bg-metaco_bg flex flex-col items-center py-12">
       <div className="w-2/3 xl:w-1/2 flex justify-center pt-6 pb-11">
-        <span className="text-3xl font-semibold text-white">{tournament.title}</span>
+        {loading ? (
+          <span className="w-3/4 h-12 bg-gray-700 bg-opacity-95 backdrop-blur-sm rounded-lg animate-pulse"></span>
+        ) : (
+          <span className="text-3xl font-semibold text-white">{tournament.title}</span>
+        )}
       </div>
       <div className="w-2/3 xl:w-1/2 h-9 flex items-center border-b border-gray-200">
         <div className="w-1/5 flex justify-center">
