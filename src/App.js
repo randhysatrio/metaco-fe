@@ -7,6 +7,7 @@ import InsertResult from './pages/InsertResult';
 import Leaderboard from './pages/Leaderboard';
 import DeleteResult from './pages/DeleteResult';
 import Explorer from './pages/Explorer';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/explorer" element={<Explorer />} />
         <Route path="/insert-result" element={<InsertResult />} />
         <Route path="/delete-result" element={<DeleteResult />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer />
     </BrowserRouter>

@@ -8,6 +8,7 @@ import ExplorerCard from '../components/Explorer/ExplorerCard';
 import ExplorerCardSkeleton from '../components/Explorer/ExplorerCardSkeleton';
 import { BsSearch } from 'react-icons/bs';
 import { toast } from 'react-toastify';
+import FooterBanner from '../components/UI/FooterBanner';
 
 export default function Explorer() {
   const [type, setType] = useState('teams');
@@ -213,6 +214,7 @@ export default function Explorer() {
           </div>
         </div>
       </div>
+      <FooterBanner />
     </Layout>
   );
 }

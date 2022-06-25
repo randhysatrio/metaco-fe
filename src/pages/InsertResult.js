@@ -5,19 +5,29 @@ import { API_URL } from '../assets/utils/API';
 import Layout from '../components/UI/Layout';
 import insert_result_banner from '../assets/images/banner/InsertResult/insert_result_banner.jpg';
 import SelectedTournament from '../components/InsertResult/SelectedTournament';
+import { toast } from 'react-toastify';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+import FooterBanner from '../components/UI/FooterBanner';
 
 export default function InsertResult() {
   const [tournaments, setTournaments] = useState([]);
   const [selectedTournamentId, setSelectedTournamentId] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchTournaments() {
       try {
+        setLoading(true);
+
         const response = await Axios.get(`${API_URL}/tournament/find?withResults=true&limit=5&sort=_id,asc`);
 
         setTournaments(response.data);
+
+        setLoading(false);
       } catch (err) {
-        console.log(err.message);
+        setLoading(false);
+
+        toast.error(err, { position: 'top-center', theme: 'colored' });
       }
     }
 
@@ -58,24 +68,35 @@ export default function InsertResult() {
           </div>
         </div>
         {!selectedTournamentId ? (
-          <div className="py-10 w-full flex flex-col items-center justify-center">
-            <span className="text-xl text-white font-semibold tracking-widest mb-8">Select Tournament to Insert:</span>
-            <select
-              onChange={(e) => setSelectedTournamentId(e.target.value)}
-              className={`w-2/3 xl:w-1/2 bg-leaderboard_list border ${
-                selectedTournamentId ? 'border-sky-400' : 'border-gray-400'
-              } rounded-xl focus:outline-none hover:border-sky-400 p-4 text-white font-semibold transition cursor-pointer`}
-            >
-              <option className="bg-gray-200 text-gray-400 font-semibold" value={''}>
-                Choose Tournament
-              </option>
-              {renderOptions()}
-            </select>
+          <div className="w-full flex flex-col items-center justify-center py-5">
+            {loading ? (
+              <div className="py-10 w-full flex items-center justify-center gap-3 text-white text-2xl font-semibold">
+                <AiOutlineLoading3Quarters className="animate-spin" />
+                <span>Getting tournaments..</span>
+              </div>
+            ) : (
+              <div className="py-10 w-full flex flex-col items-center justify-center">
+                <span className="text-xl text-white font-semibold tracking-widest mb-8">Select Tournament to Insert:</span>
+                <select
+                  value={selectedTournamentId}
+                  onChange={(e) => setSelectedTournamentId(e.target.value)}
+                  className={`w-2/3 xl:w-1/2 bg-leaderboard_list border ${
+                    selectedTournamentId ? 'border-sky-400' : 'border-gray-400'
+                  } rounded-xl focus:outline-none hover:border-sky-400 p-4 text-white font-semibold transition cursor-pointer`}
+                >
+                  <option className="bg-gray-200 text-gray-400 font-semibold" value={''}>
+                    Choose Tournament
+                  </option>
+                  {renderOptions()}
+                </select>
+              </div>
+            )}
           </div>
         ) : (
           <SelectedTournament tournamentId={selectedTournamentId} />
         )}
       </div>
+      <FooterBanner />
     </Layout>
   );
 }

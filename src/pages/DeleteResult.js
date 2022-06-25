@@ -6,6 +6,8 @@ import Layout from '../components/UI/Layout';
 import delete_result_banner from '../assets/images/banner/DeleteResult/delete_result_banner.png';
 import TournamentToDelete from '../components/DeleteResult.js/TournamentToDelete';
 import { toast } from 'react-toastify';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+import FooterBanner from '../components/UI/FooterBanner';
 
 export default function DeleteResult() {
   const [tournaments, setTournaments] = useState([]);
@@ -16,13 +18,16 @@ export default function DeleteResult() {
     async function fetchTournaments() {
       try {
         setLoading(true);
+
         const response = await Axios.get(`${API_URL}/tournament/find?withResults=true&sort=_id,asc`);
 
         setTournaments(response.data);
+
         setLoading(false);
       } catch (err) {
         setLoading(false);
-        toast.error(err.message, { position: 'top-center', theme: 'colored' });
+
+        toast.error(err, { position: 'top-center', theme: 'colored' });
       }
     }
     fetchTournaments();
@@ -61,26 +66,34 @@ export default function DeleteResult() {
             </div>
           </div>
         </div>
-        <div className="w-full flex flex-col items-center py-10">
-          <div id="select-delete-tournament" className="w-full flex flex-col items-center py-5">
-            <span className="font-semibold text-2xl text-white tracking-widest mb-7">Select Tournament to Delete</span>
-            <select
-              disabled={selectedTournamentId}
-              value={selectedTournamentId}
-              onChange={(e) => setSelectedTournamentId(e.target.value)}
-              className={`w-2/3 xl:w-1/2 bg-leaderboard_list border border-gray-400 disabled:border-sky-400 disabled:bg-gray-500 disabled:bg-opacity-70 rounded-xl focus:outline-none hover:border-sky-400 p-4 text-white font-semibold transition cursor-pointer disabled:cursor-default`}
-            >
-              <option value="" className="bg-gray-200 disabled:text-gray-400 text-gray-700 font-semibold">
-                Select Tournament
-              </option>
-              {renderTournaments()}
-            </select>
-          </div>
+        <div className="w-full flex flex-col items-center justify-center py-10">
+          {loading ? (
+            <div className="w-full py-10 flex items-center justify-center gap-2 text-2xl text-white font-semibold">
+              <AiOutlineLoading3Quarters className="animate-spin" />
+              <span>Getting tournaments..</span>
+            </div>
+          ) : (
+            <div id="select-delete-tournament" className="w-full flex flex-col items-center py-5">
+              <span className="font-semibold text-2xl text-white tracking-widest mb-7">Select Tournament to Delete</span>
+              <select
+                disabled={selectedTournamentId}
+                value={selectedTournamentId}
+                onChange={(e) => setSelectedTournamentId(e.target.value)}
+                className={`w-2/3 xl:w-1/2 bg-leaderboard_list border border-gray-400 disabled:border-sky-400 disabled:bg-gray-500 disabled:bg-opacity-70 rounded-xl focus:outline-none hover:border-sky-400 p-4 text-white font-semibold transition cursor-pointer disabled:cursor-default`}
+              >
+                <option value="" className="bg-gray-200 disabled:text-gray-400 text-gray-700 font-semibold">
+                  Select Tournament
+                </option>
+                {renderTournaments()}
+              </select>
+            </div>
+          )}
           {selectedTournamentId && (
             <TournamentToDelete tournamentId={selectedTournamentId} setSelectedTournamentId={setSelectedTournamentId} />
           )}
         </div>
       </div>
+      <FooterBanner />
     </Layout>
   );
 }
