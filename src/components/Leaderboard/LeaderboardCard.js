@@ -1,10 +1,10 @@
 function LeaderboardItem({ result }) {
   return (
     <div className="w-full h-16 rounded-xl overflow-hidden flex items-center bg-leaderboard_list text-white">
-      <div className="w-[20%] flex justify-center">
+      <div className="w-[20%] md:w-[25%] lg:w-[20%] flex justify-center">
         <span>{result.position}</span>
       </div>
-      <div className="w-[55%]">
+      <div className="w-[55%] md:w-[50%] lg:w-[55%]">
         <span>{result.team.name}</span>
       </div>
       <div className="w-[25%] flex justify-center">
@@ -27,10 +27,10 @@ export default function LeaderboardCard({ tournament, setSelectedTournament }) {
         </div>
       </div>
       <div className="flex items-center py-1 text-white font-semibold text-lg">
-        <div className="w-[20%] flex justify-center">
+        <div className="w-[20%] md:w-[25%] lg:w-[20%] flex justify-center">
           <span>Rank</span>
         </div>
-        <div className="w-[55%]">
+        <div className="w-[55%] md:w-[50%] lg:w-[55%]">
           <span>Team</span>
         </div>
         <div className="w-[25%] flex justify-center">

@@ -29,36 +29,34 @@ export default function CancelInsertModal() {
             <div className="fixed inset-0 bg-black bg-opacity-25" />
           </Transition.Child>
 
-          <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center">
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <Dialog.Panel className="w-[340px] h-40 bg-metaco_bg rounded-xl flex flex-col items-center justify-center">
-                  <span className="text-white font-semibold mb-5">Discard your changes?</span>
-                  <div className="w-full flex items-center justify-center gap-4">
-                    <button
-                      onClick={() => setShow(false)}
-                      className="w-32 h-11 rounded-xl bg-red-500 text-white font-bold hover:brightness-110 active:scale-95 transition"
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      onClick={() => navigate(-1, { replace: true })}
-                      className="w-32 h-11 rounded-xl bg-emerald-500 text-white font-bold hover:brightness-110 active:scale-95 transition"
-                    >
-                      Yes Please
-                    </button>
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
+          <div className="fixed inset-0 overflow-y-auto flex items-center justify-center">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+              <Dialog.Panel className="w-[310px] md:w-[340px] h-36 md:h-40 bg-metaco_bg rounded-xl flex flex-col items-center justify-center">
+                <span className="text-white font-semibold mb-5">Discard your changes?</span>
+                <div className="w-full flex items-center justify-center gap-4">
+                  <button
+                    onClick={() => setShow(false)}
+                    className="w-28 md:w-32 h-11 rounded-xl bg-red-500 text-white font-bold hover:brightness-110 active:scale-95 transition"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={() => navigate(-1, { replace: true })}
+                    className="w-28 md:w-32 h-11 rounded-xl bg-emerald-500 text-white font-bold hover:brightness-110 active:scale-95 transition"
+                  >
+                    Yes Please
+                  </button>
+                </div>
+              </Dialog.Panel>
+            </Transition.Child>
           </div>
         </Dialog>
       </Transition>

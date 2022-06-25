@@ -79,7 +79,7 @@ export default function Leaderboard() {
       <div className="min-h-screen bg-metaco_bg pt-[75px] flex flex-col items-center">
         <div className="h-96 w-full relative flex flex-col">
           <img src={main_banner} alt="optic" className="h-full w-full object-cover" />
-          <div className="inset-0 absolute bg-gradient-to-b from-transparent to-metaco_bg flex flex-col justify-center px-10">
+          <div className="inset-0 absolute bg-gradient-to-b from-transparent to-metaco_bg flex flex-col justify-center px-5 md:px-10">
             <div className="flex flex-col mb-5">
               <span className="text-2xl text-white mb-5">Leaderboard</span>
               <span className="text-4xl font-extrabold text-white">
@@ -90,14 +90,18 @@ export default function Leaderboard() {
               <ManageResultModal />
             </div>
           </div>
-          <div className="w-full flex px-10 absolute bottom-0 gap-5">
+          <div className="w-full flex px-5 md:px-10 absolute bottom-0 gap-5">
             {loading ? (
               renderFilterSkeleton()
             ) : (
               <>
                 <button
                   onClick={() => setSelectedTournament(null)}
-                  className="px-6 h-14 rounded-xl bg-gray-600 text-white hover:bg-[#19303F] transition active:scale-95 hover:ring-1 hover:ring-inset hover:ring-sky-700"
+                  className={`w-40 md:w-44 h-12 lg:h-14 rounded-xl ${
+                    selectedTournament === null
+                      ? 'bg-[#19303F] ring-[2px] ring-inset ring-sky-500'
+                      : 'bg-gray-600 hover:bg-[#19303F] hover:ring-[2px] hover:ring-inset hover:ring-sky-500'
+                  } text-white font-semibold text-sm md:text-xs lg:text-sm flex justify-center items-center transition active:scale-95 cursor-pointer`}
                 >
                   All Tournaments
                 </button>

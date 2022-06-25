@@ -8,7 +8,7 @@ export default function NotFound() {
         <FourOFour />
         <div className="flex flex-col items-center gap-3">
           <span className="text-white font-bold text-lg">Page not found!</span>
-          <span className="text-white">Sorry we couldn't find the page that you're looking for</span>
+          <span className="text-white text-sm md:text-base">Sorry we couldn't find the page you're looking for</span>
         </div>
       </div>
     </Layout>

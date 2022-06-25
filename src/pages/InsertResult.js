@@ -76,7 +76,7 @@ export default function InsertResult() {
               </div>
             ) : (
               <div className="py-10 w-full flex flex-col items-center justify-center">
-                <span className="text-xl text-white font-semibold tracking-widest mb-8">Select Tournament to Insert:</span>
+                <span className="text-lg md:text-xl text-white font-semibold tracking-widest mb-8">Select Tournament to Insert:</span>
                 <select
                   value={selectedTournamentId}
                   onChange={(e) => setSelectedTournamentId(e.target.value)}

@@ -13,10 +13,10 @@ export default function Banner() {
   const banners = [banner_1, banner_2, banner_3];
   return (
     <div className="w-full h-96 relative">
-      <div className="h-full w-16 md:w-32 text-2xl flex items-center justify-end absolute z-20 cursor-pointer prev">
+      <div className="h-full w-10 md:w-16 lg:w-32 text-2xl flex items-center justify-end absolute z-20 cursor-pointer prev">
         <FaChevronLeft className="text-gray-200 hover:text-gray-50 transition" />
       </div>
-      <div className="h-full w-16 md:w-32 text-2xl flex items-center absolute z-20 right-0 cursor-pointer next">
+      <div className="h-full w-10 md:w-16 lg:w-32 text-2xl flex items-center absolute z-20 right-0 cursor-pointer next">
         <FaChevronRight className="text-gray-200 hover:text-gray-50 transition" />
       </div>
       <Swiper navigation={{ prevEl: '.prev', nextEl: '.next' }} modules={[Navigation]} loop={true} className="h-full w-full">

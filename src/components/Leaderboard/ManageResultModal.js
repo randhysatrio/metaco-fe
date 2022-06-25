@@ -46,12 +46,12 @@ export default function ManageResultModal() {
                   <span className="text-white pb-4">What you want to do?</span>
                   <div className="flex flex-col items-center gap-6 py-6 ring-1 ring-inset ring-gray-500 rounded-xl">
                     <Link to="/insert-result">
-                      <button className="w-60 h-14 rounded-xl bg-gradient-to-r from-emerald-600 to-green-500 active:scale-95 transition hover:brightness-110">
+                      <button className="w-60 h-14 rounded-xl bg-gradient-to-r from-emerald-600 to-green-500 active:scale-95 transition hover:brightness-110 hover:shadow-[0_0_10px_-3px_rgba(20,255,55,1)]">
                         <span className="text-lg text-white font-semibold">Insert Result</span>
                       </button>
                     </Link>
                     <Link to="/delete-result">
-                      <button className="w-60 h-14 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 active:scale-95 transition hover:brightness-110">
+                      <button className="w-60 h-14 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 active:scale-95 transition hover:brightness-110 hover:shadow-[0_0_10px_-3px_rgba(25,190,255,1)]">
                         <span className="text-lg text-white font-semibold">Delete Result</span>
                       </button>
                     </Link>

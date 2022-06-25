@@ -85,7 +85,7 @@ export default function Explorer() {
   return (
     <Layout>
       <div className="min-h-screen pt-[75px] bg-metaco_bg flex flex-col items-center">
-        <div className="container flex flex-col items-center px-10 pt-3">
+        <div className="md:container flex flex-col items-center pt-3">
           <div className="w-full flex items-center gap-2 py-4 px-3 text-sm">
             <span className="text-gray-500">Home</span>
             <span className="text-white">/</span>
@@ -97,7 +97,7 @@ export default function Explorer() {
                 type="text"
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
-                className="h-10 w-64 bg-metaco_gray rounded-lg focus:outline-none pl-3 pr-9 text-white placeholder:text-gray-500"
+                className="h-10 w-64 md:w-52 lg:w-64 bg-metaco_gray rounded-lg focus:outline-none pl-3 pr-9 text-white placeholder:text-gray-500"
                 placeholder="Search"
               />
               <BsSearch className="absolute right-3 text-white focus:outline-none" />
@@ -110,7 +110,7 @@ export default function Explorer() {
                   setLimit(parseInt(e.target.value));
                   setPage(1);
                 }}
-                className="h-10 w-64 bg-metaco_gray rounded-lg focus:outline-none px-3 text-white"
+                className="h-10 w-64 md:w-52 lg:w-64 bg-metaco_gray rounded-lg focus:outline-none px-3 text-white"
               >
                 <option value={6}>Show: 6 Items</option>
                 <option value={12}>Show: 12 Items</option>
@@ -129,7 +129,7 @@ export default function Explorer() {
               Clear
             </button>
           </div>
-          <div className="w-full flex gap-6 px-3 py-5 mb-2">
+          <div className="w-full flex justify-center md:justify-start gap-6 px-3 py-5 md:mb-2">
             <button
               onClick={() => {
                 setType('teams');
@@ -172,13 +172,17 @@ export default function Explorer() {
             </div>
 
             {loading ? (
-              <div className="w-full px-5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-6 pb-5">{renderSkeleton()}</div>
+              <div className="w-full px-5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-6 pb-5">
+                {renderSkeleton()}
+              </div>
             ) : !datas.length && search ? (
               <div className="w-full text-center">
                 <span className="text-2xl text-white font-semibold">No results found..</span>
               </div>
             ) : (
-              <div className="w-full px-5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-6 pb-5">{renderDatas()}</div>
+              <div className="w-full px-5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-6 pb-5">
+                {renderDatas()}
+              </div>
             )}
 
             <div className="w-full py-5 flex items-center justify-center text-white text-lg font-bold gap-3">

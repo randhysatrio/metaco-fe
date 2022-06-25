@@ -68,13 +68,13 @@ export default function DeleteResult() {
         </div>
         <div className="w-full flex flex-col items-center justify-center py-10">
           {loading ? (
-            <div className="w-full py-10 flex items-center justify-center gap-2 text-2xl text-white font-semibold">
+            <div className="w-full py-10 flex items-center justify-center gap-2 text-xl lg:text-2xl text-white font-semibold">
               <AiOutlineLoading3Quarters className="animate-spin" />
               <span>Getting tournaments..</span>
             </div>
           ) : (
             <div id="select-delete-tournament" className="w-full flex flex-col items-center py-5">
-              <span className="font-semibold text-2xl text-white tracking-widest mb-7">Select Tournament to Delete</span>
+              <span className="font-semibold text-xl lg:text-2xl text-white tracking-widest mb-7">Select Tournament to Delete</span>
               <select
                 disabled={selectedTournamentId}
                 value={selectedTournamentId}

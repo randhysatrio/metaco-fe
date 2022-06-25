@@ -33,7 +33,7 @@ export default function DeleteResultModal({ tournamentId }) {
     <>
       <button
         onClick={() => setShow(true)}
-        className="w-40 h-12 rounded-xl bg-gradient-to-r from-emerald-600 to-green-500 text-white font-bold active:scale-95 transition focus:outline-none hover:shadow-[0_0_10px_-3px_rgba(20,255,55,1)]"
+        className="w-32 md:w-40 h-12 rounded-xl bg-gradient-to-r from-emerald-600 to-green-500 text-white font-bold active:scale-95 transition focus:outline-none hover:shadow-[0_0_10px_-3px_rgba(20,255,55,1)]"
       >
         Delete Result
       </button>
@@ -63,7 +63,7 @@ export default function DeleteResultModal({ tournamentId }) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-80 scale-95"
               >
-                <Dialog.Panel className="w-[340px] h-40 bg-metaco_bg rounded-xl flex flex-col items-center justify-center">
+                <Dialog.Panel className="w-[320px] md:w-[340px] h-36 md:h-40 bg-metaco_bg rounded-xl flex flex-col items-center justify-center">
                   <span className="text-white font-semibold mb-5">Delete This Tournament Result?</span>
                   <div className="w-full flex items-center justify-center gap-4">
                     <button

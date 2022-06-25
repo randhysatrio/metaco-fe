@@ -54,43 +54,41 @@ export default function InsertResultModal({ tournamentId, results }) {
             <div className="fixed inset-0 bg-black bg-opacity-25" />
           </Transition.Child>
 
-          <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center">
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <Dialog.Panel className="w-[360px] h-44 bg-metaco_bg rounded-xl flex flex-col items-center justify-center">
-                  <span className="text-white font-semibold mb-5">Insert Tournament Results?</span>
-                  <div className="w-full flex items-center justify-center gap-4">
-                    <button
-                      onClick={() => setShow(false)}
-                      className="w-36 h-12 rounded-xl bg-red-500 text-white font-bold hover:brightness-110 active:scale-95 transition"
-                    >
-                      Hold On
-                    </button>
-                    <button
-                      onClick={updateHandler}
-                      className="w-36 h-12 rounded-xl bg-emerald-500 text-white font-bold hover:brightness-110 active:scale-95 transition flex items-center justify-center gap-2"
-                    >
-                      {loading ? (
-                        <>
-                          <AiOutlineLoading3Quarters className="animate-spin" />
-                          Inserting..
-                        </>
-                      ) : (
-                        'Insert It'
-                      )}
-                    </button>
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
+          <div className="fixed inset-0 overflow-y-auto flex items-center justify-center">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+              <Dialog.Panel className="w-[310px] md:w-[360px] h-40 md:h-44 bg-metaco_bg rounded-xl flex flex-col items-center justify-center">
+                <span className="text-white font-semibold mb-5">Insert Tournament Results?</span>
+                <div className="w-full flex items-center justify-center gap-4">
+                  <button
+                    onClick={() => setShow(false)}
+                    className="w-32 md:w-36 h-12 rounded-xl bg-red-500 text-white font-bold hover:brightness-110 active:scale-95 transition"
+                  >
+                    Hold On
+                  </button>
+                  <button
+                    onClick={updateHandler}
+                    className="w-32 md:w-36 h-12 rounded-xl bg-emerald-500 text-white font-bold hover:brightness-110 active:scale-95 transition flex items-center justify-center gap-2"
+                  >
+                    {loading ? (
+                      <>
+                        <AiOutlineLoading3Quarters className="animate-spin" />
+                        Inserting..
+                      </>
+                    ) : (
+                      'Insert It'
+                    )}
+                  </button>
+                </div>
+              </Dialog.Panel>
+            </Transition.Child>
           </div>
         </Dialog>
       </Transition>

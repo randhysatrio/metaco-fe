@@ -8,13 +8,13 @@ import { API_URL } from '../../assets/utils/API';
 
 function ResultList({ result }) {
   return (
-    <div className="w-full h-12 flex items-center text-white text-lg font-semibold">
+    <div className="w-full h-12 flex items-center text-xs md:text-sm lg:text-lg text-white font-semibold">
       <div className="w-1/6 flex justify-center">
         <span className="font-bold">{result.position}</span>
       </div>
-      <div className="w-2/6 flex items-center gap-4">
+      <div className="w-2/6 flex items-center gap-2 md:gap-3 lg:gap-4">
         {result.team.logo && (
-          <div className="h-8 w-8 rounded-lg flex items-center justify-center overflow-hidden">
+          <div className="h-6 w-6 md:h-8 md:w-8 rounded-lg flex items-center justify-center overflow-hidden">
             <img src={result.team.logo} alt="team_logo" className="h-full object-contain" />
           </div>
         )}
@@ -88,13 +88,13 @@ export default function TournamentToDelete({ tournamentId, setSelectedTournament
     <div id="tournament-to-delete" className="w-full flex flex-col items-center">
       <div className="py-8 flex flex-col">
         {loading ? (
-          <span className="h-12 w-[360px] bg-gray-600 rounded-md animate-pulse"></span>
+          <span className="h-12 w-[330px] md:w-[360px] bg-gray-600 rounded-md animate-pulse"></span>
         ) : (
-          <span className="text-2xl text-white font-semibold">{tournament.title}</span>
+          <span className="text-xl md:text-2xl text-white font-semibold">{tournament.title}</span>
         )}
       </div>
-      <div className="w-2/3 flex flex-col">
-        <div className="w-full h-9 flex items-center text-white font-semibold border-b border-gray-300">
+      <div className="w-full px-4 md:w-3/4 md:px-0 lg:w-2/3 flex flex-col">
+        <div className="w-full h-9 flex items-center text-xs md:text-base text-white font-semibold border-b border-gray-300">
           <div className="w-1/6 flex justify-center">
             <span>Position</span>
           </div>
