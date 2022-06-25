@@ -17,7 +17,9 @@ export default function Header() {
           <span className="text-gray-400 hover:text-white cursor-pointer transition active:scale-95">Leaderboard</span>
         </Link>
 
-        <span className="text-gray-400 hover:text-white cursor-pointer transition active:scale-95">Explorer</span>
+        <Link to="/explorer">
+          <span className="text-gray-400 hover:text-white cursor-pointer transition active:scale-95">Explorer</span>
+        </Link>
         <BsSearch className="text-white cursor-pointer transition active:scale-95 text-lg" />
         <button className="py-2 px-7 rounded-xl text-white font-bold bg-sky-600 hover:bg-sky-700 transition active:scale-95">
           Connect

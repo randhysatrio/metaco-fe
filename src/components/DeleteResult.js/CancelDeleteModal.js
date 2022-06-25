@@ -8,7 +8,7 @@ export default function CancelDeleteModal({ setSelectedTournamentId }) {
     <>
       <button
         onClick={() => setShow(true)}
-        className="w-40 h-12 rounded-xl bg-gradient-to-r from-red-600 to-rose-500 text-white font-bold active:scale-95 transition focus:outline-none"
+        className="w-40 h-12 rounded-xl bg-gradient-to-r from-red-600 to-rose-500 text-white font-bold active:scale-95 transition focus:outline-none hover:shadow-[0_0_10px_-3px_rgba(255,33,33,1)]"
       >
         Cancel
       </button>

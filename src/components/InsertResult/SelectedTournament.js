@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { API_URL } from '../../assets/utils/API';
 
+import InsertResultModal from './InsertResultModal';
+import CancelInsertModal from './CancelInsertModal';
 import ResultInput from './ResultInput';
-import CancelModal from './CancelModal';
-import UpdateModal from './UpdateModal';
+import ResultInputSkeleton from './ResultInputSkeleton';
 import { toast } from 'react-toastify';
 
 export default function SelectedTournament({ tournamentId }) {
@@ -22,6 +23,7 @@ export default function SelectedTournament({ tournamentId }) {
         setResults(new Array(response.data.teams.length).fill(''));
         setLoading(false);
       } catch (err) {
+        setLoading(false);
         toast.error(err.message, { position: 'top-center', theme: 'colored' });
       }
     }
@@ -34,11 +36,21 @@ export default function SelectedTournament({ tournamentId }) {
     ));
   }
 
+  function renderSkeleton() {
+    const elements = [];
+
+    for (let i = 0; i < 8; i++) {
+      elements.push(<ResultInputSkeleton key={i} />);
+    }
+
+    return elements;
+  }
+
   return (
     <div id="insert-result-main" className="w-full min-h-[400px] bg-metaco_bg flex flex-col items-center py-12">
-      <div className="w-2/3 xl:w-1/2 flex justify-center pt-6 pb-11">
+      <div className="w-2/3 xl:w-1/2 flex flex-col items-center pt-6 pb-11">
         {loading ? (
-          <span className="w-3/4 h-12 bg-gray-700 bg-opacity-95 backdrop-blur-sm rounded-lg animate-pulse"></span>
+          <span className="w-[70%] h-11 bg-leaderboard_list rounded-lg animate-pulse"></span>
         ) : (
           <span className="text-3xl font-semibold text-white">{tournament.title}</span>
         )}
@@ -51,10 +63,10 @@ export default function SelectedTournament({ tournamentId }) {
           <span className="text-white font-bold">Team</span>
         </div>
       </div>
-      <div className="w-2/3 xl:w-1/2 flex flex-col gap-5 py-5 border-b border-gray-200">{renderResult()}</div>
+      <div className="w-2/3 xl:w-1/2 flex flex-col gap-5 py-5 border-b border-gray-200">{loading ? renderSkeleton() : renderResult()}</div>
       <div className="w-2/3 xl:w-1/2 flex justify-center py-5 gap-6">
-        <CancelModal />
-        <UpdateModal tournamentId={tournament.id} results={results} />
+        <CancelInsertModal />
+        <InsertResultModal tournamentId={tournament.id} results={results} />
       </div>
     </div>
   );

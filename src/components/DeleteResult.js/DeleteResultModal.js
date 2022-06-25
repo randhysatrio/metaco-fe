@@ -20,20 +20,20 @@ export default function DeleteResultModal({ tournamentId }) {
 
       setLoading(false);
       toast.success(response.data, { position: 'top-center', theme: 'colored' });
+
       navigate(-1, { replace: true });
     } catch (err) {
       setLoading(false);
+
       toast.error(err.message, { position: 'top-center', theme: 'colored' });
     }
   }
-
-  console.log(tournamentId);
 
   return (
     <>
       <button
         onClick={() => setShow(true)}
-        className="w-40 h-12 rounded-xl bg-gradient-to-r from-emerald-600 to-green-500 text-white font-bold active:scale-95 transition focus:outline-none"
+        className="w-40 h-12 rounded-xl bg-gradient-to-r from-emerald-600 to-green-500 text-white font-bold active:scale-95 transition focus:outline-none hover:shadow-[0_0_10px_-3px_rgba(20,255,55,1)]"
       >
         Delete Result
       </button>

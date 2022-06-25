@@ -74,7 +74,7 @@ export default function Leaderboard() {
         {selectedTournament ? (
           <TournamentResult selectedTournament={selectedTournament} />
         ) : (
-          <div className="w-full py-10 px-8 lg:px-28 grid grid-cols-3 gap-2">{renderTournaments()}</div>
+          <div className="w-full py-10 px-8 lg:px-28 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">{renderTournaments()}</div>
         )}
       </div>
     </Layout>
