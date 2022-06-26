@@ -11,6 +11,8 @@ module.exports = {
         metaco_btn_gray: '#303339',
         leaderboard_list: 'rgba(51,53,59,.5)',
         select_bg: '#252525',
+        bronze: '#B87333',
+        silver: '#C0C0C0',
       },
     },
   },

@@ -58,12 +58,15 @@ export default function TournamentToDelete({ tournamentId, setSelectedTournament
     async function fetchTournament() {
       try {
         setLoading(true);
+
         const response = await Axios.get(`${API_URL}/tournament/find/${tournamentId}?withResults=true`);
 
         setTournament(response.data);
+
         setLoading(false);
       } catch (err) {
         setLoading(false);
+
         toast.error(err.message, { position: 'top-center', theme: 'colored' });
       }
     }

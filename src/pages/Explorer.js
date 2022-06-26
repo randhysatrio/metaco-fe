@@ -62,7 +62,7 @@ export default function Explorer() {
       } catch (err) {
         setLoading(false);
 
-        toast.error(err, { theme: 'colored', position: 'top-center' });
+        toast.error(err.message, { theme: 'colored', position: 'top-center' });
       }
     }
     fetchDatas();

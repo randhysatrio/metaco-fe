@@ -31,7 +31,7 @@ export default function Leaderboard() {
       } catch (err) {
         setLoading(false);
 
-        toast.error(err, { position: 'top-center', theme: 'colored' });
+        toast.error(err.message, { position: 'top-center', theme: 'colored' });
       }
     }
     fetchTournaments();
