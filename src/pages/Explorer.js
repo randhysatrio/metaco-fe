@@ -92,7 +92,7 @@ export default function Explorer() {
             <span className="text-white">/</span>
             <span className="text-white">Gamer Explorer</span>
           </div>
-          <div className="w-full flex flex-col md:flex-row md:items-center gap-6 px-3">
+          <div className="w-full flex flex-col md:flex-row md:items-center gap-4 md:gap-6 px-3">
             <div className="w-max relative flex items-center">
               <input
                 type="text"
@@ -182,13 +182,26 @@ export default function Explorer() {
             </button>
           </div>
           <div id="explorer-list" className="w-full min-h-[500px] rounded-t-2xl bg-select_bg flex flex-col justify-between">
-            <div className="px-6 py-3 flex items-center gap-4">
+            <div className="px-6 py-3 flex items-center gap-4 text-xs md:text-base">
               <div className="flex text-white gap-1">
                 <span>Results:</span>
                 <span>{count}</span>
                 <span>{type === 'teams' ? 'Teams' : 'Players'}</span>
               </div>
-              {search && <span className="text-white font-semibold">Showing results for "{search}"</span>}
+              {search && (
+                <div className="flex items-center gap-3">
+                  <span className="text-white font-semibold">Showing results for "{search}"</span>
+                  <span
+                    onClick={() => {
+                      setKeyword('');
+                      setSearch('');
+                    }}
+                    className="text-emerald-400 hover:text-emerald-200 font-semibold active:scale-95 transition cursor-pointer"
+                  >
+                    Clear
+                  </span>
+                </div>
+              )}
             </div>
 
             {loading ? (
@@ -196,8 +209,17 @@ export default function Explorer() {
                 {renderSkeleton()}
               </div>
             ) : !datas.length && search ? (
-              <div className="w-full text-center">
-                <span className="text-2xl text-white font-semibold">No results found..</span>
+              <div className="w-full flex flex-col items-center gap-3">
+                <span className="text-xl md:text-2xl text-white font-semibold">No results found..</span>
+                <span
+                  onClick={() => {
+                    setKeyword('');
+                    setSearch('');
+                  }}
+                  className="text-lg text-white font-semibold hover:text-gray-200 active:scale-95 transition cursor-pointer"
+                >
+                  Clear Search
+                </span>
               </div>
             ) : (
               <div className="w-full px-5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-6 pb-5">
