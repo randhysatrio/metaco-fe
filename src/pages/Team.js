@@ -76,7 +76,7 @@ export default function Team() {
         <div className="w-full py-10 lg:py-14 flex flex-col md:flex-row justify-center items-center gap-3 md:gap-6 bg-leaderboard_list">
           <div className="w-28 h-28 md:w-32 md:h-32 lg:h-36 lg:w-36 rounded-full flex items-center justify-center overflow-hidden bg-metaco_header shadow-[0_0_10px_-2px_rgba(158,39,232,0.85)]">
             {team.logo ? (
-              <img src={team.logo} alt="team_logo" className="h-full lg:h-[95%] object-cover" />
+              <img src={team.logo} alt="team_logo" className="h-full object-cover" />
             ) : (
               <DiamondIcon className="h-full lg:h-[95%] object-cover" />
             )}

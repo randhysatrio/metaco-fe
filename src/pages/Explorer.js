@@ -19,6 +19,7 @@ export default function Explorer() {
   const [count, setCount] = useState(0);
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
+  const [sort, setSort] = useState('');
   const [loading, setLoading] = useState(false);
 
   const debouncedSearch = useCallback(
@@ -49,9 +50,9 @@ export default function Explorer() {
         let response;
 
         if (type === 'teams') {
-          response = await Axios.get(`${API_URL}/explorer/team?search=${search}&limit=${limit}&page=${page}&withResults=true`);
+          response = await Axios.get(`${API_URL}/explorer/team?search=${search}&limit=${limit}&page=${page}&withResults=true&sort=${sort}`);
         } else {
-          response = await Axios.get(`${API_URL}/explorer/player?search=${search}&limit=${limit}&page=${page}`);
+          response = await Axios.get(`${API_URL}/explorer/player?search=${search}&limit=${limit}&page=${page}&withUser=true&sort=${sort}`);
         }
 
         setDatas(response.data.results);
@@ -66,13 +67,13 @@ export default function Explorer() {
       }
     }
     fetchDatas();
-  }, [type, limit, page, search]);
+  }, [type, limit, page, search, sort]);
 
   function renderSkeleton() {
     const elements = [];
 
     for (let i = 0; i < limit; i++) {
-      elements.push(<ExplorerCardSkeleton key={i} type={type} />);
+      elements.push(<ExplorerCardSkeleton key={i} />);
     }
 
     return elements;
@@ -97,7 +98,7 @@ export default function Explorer() {
                 type="text"
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
-                className="h-10 w-64 md:w-52 lg:w-64 bg-metaco_gray rounded-lg focus:outline-none pl-3 pr-9 text-white placeholder:text-gray-500"
+                className="h-10 w-64 md:w-52 lg:w-64 bg-metaco_gray rounded-lg focus:outline-none pl-3 pr-9 text-white placeholder:text-gray-500 hover:shadow-[0_0_7px_0_rgba(24,78,214,0.65)] transition cursor-pointer"
                 placeholder="Search"
               />
               <BsSearch className="absolute right-3 text-white focus:outline-none" />
@@ -110,21 +111,38 @@ export default function Explorer() {
                   setLimit(parseInt(e.target.value));
                   setPage(1);
                 }}
-                className="h-10 w-64 md:w-52 lg:w-64 bg-metaco_gray rounded-lg focus:outline-none px-3 text-white"
+                className="h-10 w-64 md:w-52 lg:w-64 bg-metaco_gray rounded-lg focus:outline-none px-3 text-white hover:shadow-[0_0_7px_0_rgba(24,78,214,0.65)] transition cursor-pointer"
               >
                 <option value={6}>Show: 6 Items</option>
                 <option value={12}>Show: 12 Items</option>
                 <option value={18}>Show: 18 Items</option>
               </select>
             </div>
+
+            <div>
+              <select
+                value={sort}
+                onChange={(e) => {
+                  setSort(e.target.value);
+                  setPage(1);
+                }}
+                className="h-10 w-48 md:w-32 bg-metaco_gray rounded-lg focus:outline-none px-3 text-white hover:shadow-[0_0_7px_0_rgba(24,78,214,0.65)] transition cursor-pointer"
+              >
+                <option value="">Sort</option>
+                <option value={type === 'teams' ? 'name,asc' : 'ingame_id,desc'}>Name</option>
+                <option value={type === 'teams' ? 'totalPoints,desc' : 'user.coin,asc'}>{type === 'teams' ? 'Points' : 'Coins'}</option>
+              </select>
+            </div>
+
             <button
               onClick={() => {
                 setKeyword('');
                 setSearch('');
+                setSort('');
                 setPage(1);
                 setLimit(12);
               }}
-              className="h-10 w-32 bg-metaco_gray rounded-lg text-white active:scale-95 transition"
+              className="h-10 w-32 bg-metaco_gray rounded-lg text-white active:scale-95 hover:shadow-[0_0_7px_0_rgba(17,99,214,0.65)] transition"
             >
               Clear
             </button>
@@ -135,6 +153,7 @@ export default function Explorer() {
                 setType('teams');
                 setKeyword('');
                 setSearch('');
+                setSort('');
                 setPage(1);
               }}
               className={`h-10 w-40 rounded-lg ${
@@ -150,6 +169,7 @@ export default function Explorer() {
                 setType('players');
                 setKeyword('');
                 setSearch('');
+                setSort('');
                 setPage(1);
               }}
               className={`h-10 w-40 rounded-lg ${

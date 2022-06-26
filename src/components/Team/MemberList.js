@@ -20,7 +20,9 @@ export default function MemberList({ member }) {
         >
           {member.roles}
         </span>
-        <span className="text-sm md:text-base lg:text-lg text-gray-200 font-bold truncate">{member.user?.name}</span>
+        <span className="text-sm md:text-base lg:text-lg text-gray-200 font-bold truncate">
+          {member.ingame_id ? member.ingame_id : 'Name Unavailable'}
+        </span>
       </div>
       <div className="h-full md:h-1/4 w-[25%] md:w-full flex items-center md:items-start justify-center md:px-2 lg:px-4 md:py-1">
         <span className="text-xs md:text-sm text-white font-bold">{member.user?.coin} COINS</span>
