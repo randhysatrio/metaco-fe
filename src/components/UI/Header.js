@@ -6,7 +6,7 @@ import Sidebar from './Sidebar';
 
 export default function Header() {
   return (
-    <div className="w-screen h-[75px] bg-metaco_header flex items-center justify-between px-3 md:px-8 lg:px-12 fixed top-0 z-[100]">
+    <div className="w-screen h-[75px] bg-metaco_header flex items-center justify-between px-4 md:px-8 lg:px-12 fixed top-0 z-[100]">
       <Link to="/">
         <div className="h-[30px] lg:h-[50px]">
           <MetacoLogo className="h-full object-contain" />

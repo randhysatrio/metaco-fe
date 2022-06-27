@@ -35,7 +35,7 @@ export default function Sidebar() {
     return () => {
       window.removeEventListener('resize', resizeObserver);
     };
-  }, []);
+  }, [resizeObserver]);
 
   return (
     <>
@@ -67,7 +67,7 @@ export default function Sidebar() {
               leaveFrom="translate-y-0"
               leaveTo="-translate-x-1/2"
             >
-              <Dialog.Panel className="min-h-screen overflow-y-auto w-1/2 sm:w-1/3 bg-metaco_bg flex flex-col items-center px-5 py-7">
+              <Dialog.Panel className="min-h-screen overflow-y-auto w-1/2 sm:w-1/3 bg-metaco_bg flex flex-col items-center px-5 py-10">
                 <div className="w-full flex flex-col gap-3 mb-4">
                   <SidebarLink to="/leaderboard">Leaderboard</SidebarLink>
 

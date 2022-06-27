@@ -2,15 +2,17 @@ import { useState, useEffect, useCallback } from 'react';
 import Axios from 'axios';
 import { API_URL } from '../assets/utils/API';
 import { debounce } from 'throttle-debounce';
+import { useNavigate } from 'react-router-dom';
 
 import Layout from '../components/UI/Layout';
+import FooterBanner from '../components/UI/FooterBanner';
 import ExplorerCard from '../components/Explorer/ExplorerCard';
 import ExplorerCardSkeleton from '../components/Explorer/ExplorerCardSkeleton';
 import { BsSearch } from 'react-icons/bs';
 import { toast } from 'react-toastify';
-import FooterBanner from '../components/UI/FooterBanner';
 
 export default function Explorer() {
+  const navigate = useNavigate();
   const [type, setType] = useState('teams');
   const [keyword, setKeyword] = useState('');
   const [search, setSearch] = useState('');
@@ -41,7 +43,7 @@ export default function Explorer() {
   useEffect(() => {
     async function fetchDatas() {
       try {
-        if (!page || page > maxPage) {
+        if (!page || page === '0' || page > maxPage) {
           return;
         }
 
@@ -86,9 +88,11 @@ export default function Explorer() {
   return (
     <Layout>
       <div className="min-h-screen pt-[75px] bg-metaco_bg flex flex-col items-center">
-        <div className="md:container flex flex-col items-center pt-3">
+        <div className="w-full md:container flex flex-col items-center pt-3">
           <div className="w-full flex items-center gap-2 py-4 px-3 text-sm">
-            <span className="text-gray-500">Home</span>
+            <span onClick={() => navigate('/')} className="text-gray-500 hover:text-white transition cursor-pointer active:scale-95">
+              Home
+            </span>
             <span className="text-white">/</span>
             <span className="text-white">Gamer Explorer</span>
           </div>
@@ -164,6 +168,7 @@ export default function Explorer() {
             >
               Teams
             </button>
+
             <button
               onClick={() => {
                 setType('players');
@@ -229,7 +234,7 @@ export default function Explorer() {
 
             <div className="w-full py-5 flex items-center justify-center text-white text-lg font-bold gap-3">
               <button
-                disabled={page === 1}
+                disabled={page === 1 || !page}
                 onClick={() => {
                   setPage((prevPage) => parseInt(prevPage) - 1);
                   window.scrollTo({ top: 190, behavior: 'smooth' });
@@ -241,13 +246,14 @@ export default function Explorer() {
               <input
                 type="number"
                 value={page}
+                min={0}
                 onChange={(e) => setPage(e.target.value)}
                 className="w-10 bg-metaco_gray focus:outline-none rounded-lg text-center text-white font-bold transition cursor-pointer focus:ring-[1px] focus:ring-sky-500"
               />
               <span>of</span>
               <span>{maxPage}</span>
               <button
-                disabled={page === maxPage}
+                disabled={page === maxPage || !page}
                 onClick={() => {
                   setPage((prevPage) => parseInt(prevPage) + 1);
                   window.scrollTo({ top: 190, behavior: 'smooth' });
