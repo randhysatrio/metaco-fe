@@ -9,6 +9,7 @@ import FooterBanner from '../components/UI/FooterBanner';
 import ExplorerCard from '../components/Explorer/ExplorerCard';
 import ExplorerCardSkeleton from '../components/Explorer/ExplorerCardSkeleton';
 import { BsSearch } from 'react-icons/bs';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 
 export default function Explorer() {
@@ -188,12 +189,19 @@ export default function Explorer() {
           </div>
           <div id="explorer-list" className="w-full min-h-[500px] rounded-t-2xl bg-select_bg flex flex-col justify-between">
             <div className="px-6 py-3 flex items-center gap-4 text-xs md:text-base">
-              <div className="flex text-white gap-1">
-                <span>Results:</span>
-                <span>{count}</span>
-                <span>{type === 'teams' ? 'Teams' : 'Players'}</span>
-              </div>
-              {search && (
+              {loading ? (
+                <div className="flex items-center text-white gap-2">
+                  <span>Getting results..</span>
+                  <AiOutlineLoading3Quarters className="animate-spin text-sm" />
+                </div>
+              ) : (
+                <div className="flex text-white gap-1">
+                  <span>Results:</span>
+                  <span>{count}</span>
+                  <span>{type === 'teams' ? 'Teams' : 'Players'}</span>
+                </div>
+              )}
+              {search && !loading && (
                 <div className="flex items-center gap-3">
                   <span className="text-white font-semibold">Showing results for "{search}"</span>
                   <span
@@ -214,7 +222,7 @@ export default function Explorer() {
                 {renderSkeleton()}
               </div>
             ) : !datas.length && search ? (
-              <div className="w-full flex flex-col items-center gap-3">
+              <div className="flex-1 flex flex-col items-center justify-center gap-3">
                 <span className="text-xl md:text-2xl text-white font-semibold">No results found..</span>
                 <span
                   onClick={() => {
@@ -232,37 +240,40 @@ export default function Explorer() {
               </div>
             )}
 
-            <div className="w-full py-5 flex items-center justify-center text-white text-lg font-bold gap-3">
-              <button
-                disabled={page === 1 || !page}
-                onClick={() => {
-                  setPage((prevPage) => parseInt(prevPage) - 1);
-                  window.scrollTo({ top: 190, behavior: 'smooth' });
-                }}
-                className="hover:text-sky-500 active:scale-95 transition disabled:text-gray-600 disabled:active:scale-95 disabled:hover:text-gray-600"
-              >
-                -
-              </button>
-              <input
-                type="number"
-                value={page}
-                min={0}
-                onChange={(e) => setPage(e.target.value)}
-                className="w-10 bg-metaco_gray focus:outline-none rounded-lg text-center text-white font-bold transition cursor-pointer focus:ring-[1px] focus:ring-sky-500"
-              />
-              <span>of</span>
-              <span>{maxPage}</span>
-              <button
-                disabled={page === maxPage || !page}
-                onClick={() => {
-                  setPage((prevPage) => parseInt(prevPage) + 1);
-                  window.scrollTo({ top: 190, behavior: 'smooth' });
-                }}
-                className="hover:text-sky-500 active:scale-95 transition disabled:text-gray-600 disabled:active:scale-95 disabled:hover:text-gray-600"
-              >
-                +
-              </button>
-            </div>
+            {!datas.length && search ? null : (
+              <div className="w-full py-5 flex items-center justify-center text-white text-lg font-bold gap-3">
+                <button
+                  disabled={page === 1 || !page || loading}
+                  onClick={() => {
+                    setPage((prevPage) => parseInt(prevPage) - 1);
+                    window.scrollTo({ top: 190, behavior: 'smooth' });
+                  }}
+                  className="hover:text-sky-500 active:scale-95 transition disabled:text-gray-600 disabled:active:scale-95 disabled:hover:text-gray-600"
+                >
+                  -
+                </button>
+                <input
+                  type="number"
+                  disabled={loading}
+                  value={page}
+                  min={0}
+                  onChange={(e) => setPage(e.target.value)}
+                  className="w-10 bg-metaco_gray focus:outline-none rounded-lg text-center text-white font-bold transition cursor-pointer focus:ring-[1px] focus:ring-sky-500 disabled:brightness-[80%] disabled:cursor-default disabled:focus:ring-0"
+                />
+                <span>of</span>
+                <span>{maxPage}</span>
+                <button
+                  disabled={page === maxPage || !page || loading}
+                  onClick={() => {
+                    setPage((prevPage) => parseInt(prevPage) + 1);
+                    window.scrollTo({ top: 190, behavior: 'smooth' });
+                  }}
+                  className="hover:text-sky-500 active:scale-95 transition disabled:text-gray-600 disabled:active:scale-95 disabled:hover:text-gray-600"
+                >
+                  +
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
