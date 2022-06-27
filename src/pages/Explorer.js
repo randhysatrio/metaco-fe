@@ -39,7 +39,7 @@ export default function Explorer() {
 
   useEffect(() => {
     debouncedSearch(keyword);
-  }, [keyword]);
+  }, [keyword, debouncedSearch]);
 
   useEffect(() => {
     async function fetchDatas() {
@@ -191,7 +191,7 @@ export default function Explorer() {
             <div className="px-6 py-3 flex items-center gap-4 text-xs md:text-base">
               {loading ? (
                 <div className="flex items-center text-white gap-2">
-                  <span>Getting results..</span>
+                  <span>Getting {type === 'teams' ? 'teams' : 'players'}..</span>
                   <AiOutlineLoading3Quarters className="animate-spin text-sm" />
                 </div>
               ) : (
@@ -243,7 +243,7 @@ export default function Explorer() {
             {!datas.length && search ? null : (
               <div className="w-full py-5 flex items-center justify-center text-white text-lg font-bold gap-3">
                 <button
-                  disabled={page === 1 || !page || loading}
+                  disabled={parseInt(page) === 1 || !page || loading || parseInt(page) > maxPage}
                   onClick={() => {
                     setPage((prevPage) => parseInt(prevPage) - 1);
                     window.scrollTo({ top: 190, behavior: 'smooth' });
@@ -263,7 +263,7 @@ export default function Explorer() {
                 <span>of</span>
                 <span>{maxPage}</span>
                 <button
-                  disabled={page === maxPage || !page || loading}
+                  disabled={parseInt(page) === maxPage || !page || loading || parseInt(page) > maxPage}
                   onClick={() => {
                     setPage((prevPage) => parseInt(prevPage) + 1);
                     window.scrollTo({ top: 190, behavior: 'smooth' });
